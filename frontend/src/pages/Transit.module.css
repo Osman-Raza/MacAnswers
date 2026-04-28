@@ -1,0 +1,211 @@
+.page {
+  flex: 1;
+  padding: 32px 24px;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tabBtn {
+  padding: 9px 18px;
+  border: 1.5px solid var(--mac-border);
+  border-radius: 8px;
+  background: white;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mac-muted);
+  transition: all var(--transition);
+}
+
+.tabBtn.active, .tabBtn:hover {
+  background: var(--mac-maroon);
+  color: white;
+  border-color: var(--mac-maroon);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lookupRow {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mac-text);
+}
+
+.input {
+  padding: 10px 14px;
+  border: 1.5px solid var(--mac-border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  width: 120px;
+  outline: none;
+}
+
+.input:focus { border-color: var(--mac-maroon); }
+
+.lookupBtn {
+  padding: 10px 20px;
+  background: var(--mac-maroon);
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  height: 42px;
+  transition: opacity var(--transition);
+}
+
+.lookupBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.quickRoutes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.routeChip {
+  padding: 5px 14px;
+  border: 1.5px solid var(--mac-border);
+  border-radius: 16px;
+  background: white;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--mac-text);
+  transition: all var(--transition);
+}
+
+.routeChip:hover, .routeChip.activeChip {
+  background: var(--mac-maroon);
+  color: white;
+  border-color: var(--mac-maroon);
+}
+
+.results { display: flex; flex-direction: column; gap: 10px; }
+
+.resultsTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mac-maroon);
+}
+
+.departures {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.departure {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border: 1.5px solid var(--mac-border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+}
+
+.depLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.depTime {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--mac-text);
+}
+
+.depHead {
+  font-size: 13px;
+  color: var(--mac-muted);
+}
+
+.depStop {
+  font-size: 12px;
+  color: var(--mac-muted);
+}
+
+.depMins {
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--mac-maroon);
+  background: #f7f0f4;
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+
+.depMins.soon {
+  background: #fff0f0;
+  color: #ef4444;
+}
+
+.empty, .error {
+  font-size: 14px;
+  color: var(--mac-muted);
+  padding: 24px 0;
+  text-align: center;
+}
+
+.error { color: #ef4444; }
+
+/* Shuttle */
+.shuttleTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mac-maroon);
+}
+
+.shuttleGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.shuttleRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  gap: 12px;
+  background: white;
+  border: 1.5px solid var(--mac-border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-size: 14px;
+  align-items: center;
+}
+
+.shuttleDay { font-weight: 700; color: var(--mac-text); }
+.shuttleTime { color: var(--mac-muted); font-family: var(--font-mono); font-size: 13px; }
+.shuttleFreq { color: var(--mac-maroon); font-weight: 600; font-size: 13px; }
+
+.shuttleNote {
+  font-size: 12px;
+  color: var(--mac-muted);
+  font-style: italic;
+}

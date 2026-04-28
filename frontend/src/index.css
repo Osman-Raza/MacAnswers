@@ -1,0 +1,36 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --mac-maroon:  #7a003c;
+  --mac-gold:    #fdbf57;
+  --mac-dark:    #1a0a12;
+  --mac-surface: #f7f2f5;
+  --mac-border:  #e8dce3;
+  --mac-text:    #1a0a12;
+  --mac-muted:   #8a6478;
+  --radius:      10px;
+  --font-sans:   'DM Sans', sans-serif;
+  --font-mono:   'DM Mono', monospace;
+  --transition:  180ms ease;
+}
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--mac-surface);
+  color: var(--mac-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root { height: 100%; display: flex; flex-direction: column; }
+
+a { color: var(--mac-maroon); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  outline: none;
+}

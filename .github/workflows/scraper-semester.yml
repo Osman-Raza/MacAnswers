@@ -1,0 +1,24 @@
+name: Scrapers — Semester (Tuition, OSAP, Housing, etc.)
+
+on:
+  schedule:
+    - cron: "0 4 1 1,5,9 *"   # Jan 1, May 1, Sep 1 at 4am
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r scraper/requirements.txt
+      - name: Run semester scrapers
+        working-directory: scraper
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python run_all.py --group semester

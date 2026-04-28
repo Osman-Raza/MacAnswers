@@ -1,0 +1,85 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: var(--mac-maroon);
+  color: white;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 60px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(122, 0, 60, 0.25);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  background: var(--mac-gold);
+  color: var(--mac-maroon);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.wordmark {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+}
+
+.tab {
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background var(--transition), color var(--transition);
+}
+
+.tab:hover {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.tab.active {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+.tabIcon {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.main {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}

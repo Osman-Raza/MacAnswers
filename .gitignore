@@ -1,0 +1,19 @@
+# Environment files — never commit these
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Build output
+dist/
+build/
+
+# OS junk
+.DS_Store
+Thumbs.db

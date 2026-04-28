@@ -2,7 +2,7 @@ import cron from "node-cron";
 import { Resend } from "resend";
 import supabase from "../lib/supabase.js";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 const CATEGORY_LABELS = {
   electrical: "⚡ Electrical",
@@ -17,6 +17,7 @@ const CATEGORY_LABELS = {
 
 async function sendWeeklyDigest() {
   // Fetch top open issues by upvotes
+  if (!resend) { console.log("Resend not configured — skipping digest."); return; }
   const { data: issues, error } = await supabase
     .from("campus_issues")
     .select("title, description, category, building, upvotes, reported_at, latitude, longitude")

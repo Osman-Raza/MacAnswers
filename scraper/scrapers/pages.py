@@ -24,7 +24,7 @@ class SnowDayScraper(BaseScraper):
 
 class CourseSelectionScraper(BaseScraper):
     source_name = "Course Selection & Registration"
-    source_url = "https://registrar.mcmaster.ca/registration/course-selection/"
+    source_url = "https://registrar.mcmaster.ca/build-degree/mytimetable/"
 
     def parse(self, html: str) -> str:
         return clean_html(html)
@@ -32,7 +32,7 @@ class CourseSelectionScraper(BaseScraper):
 
 class OSAPScraper(BaseScraper):
     source_name = "OSAP & Financial Aid"
-    source_url = "https://sfas.mcmaster.ca/osap/"
+    source_url = "https://registrar.mcmaster.ca/aid-awards/osap-government-aid/"
 
     def parse(self, html: str) -> str:
         return clean_html(html)
@@ -85,7 +85,7 @@ class AnnouncementsScraper(BaseScraper):
             lines.append("")
         return "\n".join(lines)
 
-
+'''
 class RateMyProfScraper(BaseScraper):
     """
     RateMyProfessors does not have a public API.
@@ -111,3 +111,4 @@ class RateMyProfScraper(BaseScraper):
             return "\n".join(lines)
         except Exception:
             return ""
+'''

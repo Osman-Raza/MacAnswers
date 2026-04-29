@@ -23,7 +23,6 @@ from scrapers.pages import (
     HousingDeadlinesScraper,
     DentalPlanScraper,
     AcademicCalendarScraper,
-    RateMyProfScraper,
 )
 from scrapers.hsr import run as run_hsr
 
@@ -35,7 +34,6 @@ SEMESTER = [
     HousingDeadlinesScraper,
     DentalPlanScraper,
     AcademicCalendarScraper,
-    RateMyProfScraper,
 ]
 
 def main():

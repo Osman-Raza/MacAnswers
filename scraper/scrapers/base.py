@@ -24,7 +24,7 @@ def get_supabase() -> Client:
     return create_client(url, key)
 
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-_embed_model = "models/text-embedding-004"
+_embed_model = "text-embedding-004"
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 CHUNK_SIZE = 500      # tokens ≈ chars / 4, so ~2000 chars

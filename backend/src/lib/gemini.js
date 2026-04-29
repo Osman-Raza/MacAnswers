@@ -5,7 +5,7 @@ if (!process.env.GEMINI_API_KEY) throw new Error("Missing GEMINI_API_KEY");
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // ── Embedding ─────────────────────────────────────────────────────────────────
-const embeddingModel = genAI.getGenerativeModel({ model: "text-embedding-004" });
+const embeddingModel = genAI.getGenerativeModel({ model: "models/embedding-001" });
 
 /**
  * Embed a single string. Returns a float array (length 768).

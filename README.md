@@ -1,66 +1,32 @@
-# MacAnswers — Campus Intelligence Platform
-
-A single destination for every McMaster student question.
-
-## Project Structure
-
-```
-macanswers/
-├── frontend/        # React app (Vite) — deployed on Vercel
-├── backend/         # Node.js + Express API — deployed on Render
-├── scraper/         # Python scrapers — run via GitHub Actions
-└── database/        # Supabase SQL migrations
-```
-
-## Quick Start
-
-### 1. Database (Supabase)
-- Create a new Supabase project
-- Run `database/migrations.sql` in the SQL editor
-- Enable the `pgvector` extension (Database → Extensions)
-- Copy your `SUPABASE_URL` and `SUPABASE_ANON_KEY`
-
-### 2. Backend
-```bash
-cd backend
-npm install
-cp .env.example .env   # fill in your keys
-npm run dev
-```
-
-### 3. Frontend
-```bash
-cd frontend
-npm install
-cp .env.example .env   # fill in your keys
-npm run dev
-```
-
-### 4. Scraper
-```bash
-cd scraper
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env   # fill in your keys
-python run_all.py
-```
-
-## Environment Variables
-
-| Service   | Variable | Description |
-|-----------|----------|-------------|
-| Backend   | `SUPABASE_URL` | Supabase project URL |
-| Backend   | `SUPABASE_SERVICE_KEY` | Supabase service role key |
-| Backend   | `GEMINI_API_KEY` | Google Gemini API key |
-| Backend   | `RESEND_API_KEY` | Resend email API key |
-| Frontend  | `VITE_API_URL` | Backend URL |
-| Frontend  | `VITE_MAPBOX_TOKEN` | Mapbox public token |
-| Scraper   | `SUPABASE_URL` | Supabase project URL |
-| Scraper   | `SUPABASE_SERVICE_KEY` | Supabase service role key |
-| Scraper   | `GEMINI_API_KEY` | Google Gemini API key |
-
-## Deployment
-
-- **Frontend**: Connect the `frontend/` folder to Vercel
-- **Backend**: Connect the `backend/` folder to Render (web service, Node)
-- **Scrapers**: GitHub Actions workflows in `.github/workflows/` run automatically
+# MacAnswers
+ 
+A campus intelligence platform built for McMaster University students. The goal is simple: improve student life by putting everything you need in one place — no more digging through dozens of poorly organized university pages, no more missed snow days, no more Reddit posts asking questions that are technically answered somewhere but impossible to find.
+ 
+## Features
+ 
+### Ask Anything
+An AI-powered chat interface that answers any McMaster-related question in plain English and responds with a direct answer and a link to the exact source page it came from. The knowledge base is built from McMaster's own pages — tuition by program, course selection dates, OSAP and financial aid, dental plan opt-outs, housing deadlines, academic calendar dates, and more. Time-sensitive pages like snow day alerts and announcements are scraped every hour so the information is always current. If the system isn't confident in an answer, it tells you and links you directly to the source instead of guessing.
+ 
+### Campus Issue Tracker
+An interactive map of McMaster's campus where students can report problems — broken outlets, malfunctioning printers, accessibility issues, HVAC problems, safety concerns, and more — by dropping a pin at the exact location. Issues are color coded by category and sized by upvote count so the most urgent problems are visually obvious at a glance. Students can upvote issues they've also encountered, which helps prioritize what gets fixed first. Every Monday, an automated email digest sends the top open issues to the relevant McMaster departments. Resolved issues fade from the map automatically.
+ 
+### Transit Lookup
+Real-time HSR bus schedules pulled directly from the public GTFS data feed, plus the McMaster shuttle schedule. Students can look up any route by number and see the next departures with a live countdown in minutes — all without leaving the app or navigating a separate transit app.
+ 
+## Tech Stack
+ 
+- **Frontend** — React + Vite, Mapbox
+- **Backend** — Node.js + Express
+- **Database** — Supabase (PostgreSQL + pgvector)
+- **AI** — Gemini API (embeddings + generation)
+- **Scrapers** — Python + BeautifulSoup
+- **Automation** — GitHub Actions
+## Setup
+ 
+1. Clone the repo
+2. Create a Supabase project and run `database/migrations.sql` in the SQL editor
+3. Get API keys for Gemini and Mapbox
+4. Copy `.env.example` to `.env` in `backend/`, `frontend/`, and `scraper/` and fill in your keys
+5. Run the backend: `cd backend && npm install && npm run dev`
+6. Run the frontend: `cd frontend && npm install && npm run dev`
+7. Run the scrapers: `cd scraper && pip install -r requirements.txt && python run_all.py 

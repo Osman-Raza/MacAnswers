@@ -5,7 +5,7 @@ if (!process.env.GEMINI_API_KEY) throw new Error("Missing GEMINI_API_KEY");
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // ── Embedding ─────────────────────────────────────────────────────────────────
-const embeddingModel = genAI.getGenerativeModel({ model: "models/embedding-001" });
+const embeddingModel = genAI.getGenerativeModel({ model: "models/gemini-embedding-001" });
 
 /**
  * Embed a single string. Returns a float array (length 768).
@@ -16,7 +16,7 @@ export async function embed(text) {
 }
 
 // ── Generation ────────────────────────────────────────────────────────────────
-const generationModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const generationModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
 
 const SYSTEM_PROMPT = `You are MacAnswers, a helpful assistant for McMaster University students.
 Answer questions ONLY using the provided context chunks.

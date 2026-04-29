@@ -15,7 +15,8 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 from supabase import create_client, Client
 
-load_dotenv()
+from pathlib import Path
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 # ── Clients ───────────────────────────────────────────────────────────────────
 def get_supabase() -> Client:
@@ -23,7 +24,6 @@ def get_supabase() -> Client:
     key = os.environ["SUPABASE_SERVICE_KEY"]
     return create_client(url, key)
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 _embed_model = "models/gemini-embedding-001"
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -56,11 +56,12 @@ def chunk_text(text: str, size: int = CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) 
 
 def embed_texts(texts: list[str]) -> list[list[float]]:
     """Batch embed via Gemini. Returns list of float vectors."""
+    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
     embeddings = []
     for text in texts:
         result = genai.embed_content(model=_embed_model, content=text)
         embeddings.append(result["embedding"])
-        time.sleep(0.05)   # stay inside free-tier rate limits
+        time.sleep(0.05)
     return embeddings
 
 

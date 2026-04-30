@@ -12,8 +12,8 @@ from typing import Generator
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-import google.generativeai as genai
-from supabase import create_client, Client
+import google.generativeai as genai # type: ignore
+from supabase import create_client, Client # type: ignore
 
 from pathlib import Path
 load_dotenv(Path(__file__).parent.parent / ".env")

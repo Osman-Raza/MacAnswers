@@ -60,6 +60,8 @@ class AcademicCalendarScraper(BaseScraper):
 
     def parse(self, html: str) -> str:
         return clean_html(html)
+    
+
 
 
 class AnnouncementsScraper(BaseScraper):

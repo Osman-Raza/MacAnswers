@@ -16,44 +16,41 @@ export async function embed(text) {
 }
 
 // ── Generation ────────────────────────────────────────────────────────────────
-const generationModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
+import Groq from "groq-sdk";
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-const SYSTEM_PROMPT = `You are MacAnswers, a helpful assistant for McMaster University students.
-Answer questions ONLY using the provided context chunks.
-Always end your answer with the source URL on its own line, formatted as:
-Source: <url>
-If the context does not contain enough information to answer confidently, reply ONLY with:
-LOW_CONFIDENCE: <source_url>
-Do not make up information. Do not reference anything outside the provided chunks.`;
-
-/**
- * Generate an answer from retrieved chunks.
- * @param {string} question
- * @param {Array<{content: string, source_url: string, source_name: string}>} chunks
- * @returns {{ answer: string, source: string, lowConfidence: boolean }}
- */
 export async function generateAnswer(question, chunks) {
   const context = chunks
     .map((c, i) => `[${i + 1}] (${c.source_name} — ${c.source_url})\n${c.content}`)
     .join("\n\n");
 
-  const prompt = `${SYSTEM_PROMPT}
+  const completion = await groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
+    messages: [
+      {
+        role: "system",
+        content: `You are MacAnswers, a helpful assistant for McMaster University students.
+Answer questions ONLY using the provided context chunks.
+Always end your answer with the source URL on its own line, formatted as:
+Source: <url>
+If the context does not contain enough information to answer confidently, reply ONLY with:
+LOW_CONFIDENCE: <source_url>
+Do not make up information. Do not reference anything outside the provided chunks.`
+      },
+      {
+        role: "user",
+        content: `--- CONTEXT ---\n${context}\n\n--- QUESTION ---\n${question}`
+      }
+    ],
+  });
 
---- CONTEXT ---
-${context}
-
---- QUESTION ---
-${question}`;
-
-  const result = await generationModel.generateContent(prompt);
-  const text = result.response.text().trim();
+  const text = completion.choices[0].message.content.trim();
 
   if (text.startsWith("LOW_CONFIDENCE:")) {
     const source = text.replace("LOW_CONFIDENCE:", "").trim();
     return { answer: null, source, lowConfidence: true };
   }
 
-  // Parse "Source: <url>" from the end
   const sourceMatch = text.match(/Source:\s*(https?:\/\/\S+)/i);
   const source = sourceMatch ? sourceMatch[1] : chunks[0]?.source_url ?? "";
   const answer = text.replace(/Source:\s*https?:\/\/\S+/i, "").trim();

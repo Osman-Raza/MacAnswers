@@ -11,7 +11,7 @@ import zipfile
 import csv
 import time
 from dotenv import load_dotenv
-from supabase import create_client
+from supabase import create_client # type: ignore
 
 load_dotenv()
 
